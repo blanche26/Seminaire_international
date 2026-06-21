@@ -1,4 +1,4 @@
-Document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
 
     if (typeof initMobileNav === "function") {
         initMobileNav();
