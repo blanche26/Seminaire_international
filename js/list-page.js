@@ -254,7 +254,7 @@ function recupererMembres() {
                     );
 
                 boutonVoir.href =
-                    "participant.html?id=" +
+                    "Participant.html?id=" +
                     personne.id;
 
                 boutonVoir.textContent =
