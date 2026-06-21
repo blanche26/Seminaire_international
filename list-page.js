@@ -410,4 +410,4 @@ function enregistrerMembre(
                 "Impossible d'enregistrer le participant."
             );
         });
-                  }
+}
