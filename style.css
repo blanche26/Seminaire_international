@@ -1,0 +1,210 @@
+:root {
+    --fond-page: #f5f7fa;
+    --texte-sombre: #2c3e50;
+    --bleu-principal: #34495e;
+    --bleu-clair: #5dade2;
+    --vert-validation: #2ecb71;
+    --blanc: #ffffff;
+    --bordure: #d5dbdb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--fond-page);
+    color: var(--texte-sombre);
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* En-tete et navigation */
+.seminar-theme {
+    background-color: var(--bleu-principal);
+    color: var(--blanc);
+    padding: 20px 0;
+}
+
+.top-subtitle {
+    font-size: 0.85rem;
+    color: #bdc3c7;
+    margin-bottom: 5px;
+}
+
+#main-nav {
+    margin-top: 10px;
+}
+
+#main-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+#main-nav a:hover {
+    text-decoration: underline;
+}
+
+/* Titres */
+.section-title, h2, h3 {
+    text-align: left;
+    margin: 35px 0 20px 0;
+    color: var(--bleu-principal);
+    border-bottom: 2px solid var(--bleu-principal);
+    padding-bottom: 8px;
+}
+
+/* Zone d'introduction */
+.intro-text {
+    background-color: var(--blanc);
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 4px solid var(--bleu-clair);
+}
+
+/* Chargement */
+#loading-container {
+    background-color: #e2e8f0;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+/* Tableau */
+#table-container {
+    background-color: var(--blanc);
+    margin: 20px 0 40px 0;
+    border: 1px solid var(--bordure);
+    border-radius: 4px;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #f8f9fa;
+    color: var(--texte-sombre);
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--bordure);
+    font-size: 0.95rem;
+}
+
+td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--bordure);
+    vertical-align: middle;
+    font-size: 0.9rem;
+    color: var(--texte-sombre);
+}
+
+tr:hover {
+    background-color: #f2f4f4;
+}
+
+/* Formulaires */
+#form-section, .form-card {
+    background-color: var(--blanc);
+    padding: 25px;
+    border: 1px solid var(--bordure);
+    border-radius: 4px;
+    margin: 30px 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--bordure);
+    border-radius: 4px;
+}
+
+/* Boutons */
+#btn-submit {
+    background-color: var(--bleu-clair);
+    color: var(--blanc);
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+#btn-update {
+    background-color: var(--vert-validation);
+    color: var(--blanc);
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+/* Pied de page */
+.site-footer {
+    background-color: var(--bleu-principal);
+    color: #ffffff;
+    padding: 25px 0;
+    margin-top: 50px;
+}
+
+.footer-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.footer-container h3 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin: 15px 0 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 4px;
+}
+
+.footer-container p {
+    font-size: 0.9rem;
+    color: #ecf0f1;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+/* Liens du pied de page */
+.footer-container a, 
+.footer-container a:visited {
+    color: #ffffff !important;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 0.95rem;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.footer-container a:hover {
+    color: #5dade2 !important;
+}
