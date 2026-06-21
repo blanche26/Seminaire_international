@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion du Séminaire International</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="seminar-theme">
+        <div class="container">
+            <p class="top-subtitle">Portail Académique — Connexion REST API</p>
+            <h1>Gestion du Séminaire International</h1>
+            <nav id="main-nav">
+                <a href="index.html" class="active">Accueil</a>
+                <a href="#form-section">Inscrire un membre</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-text">
+            <h2>Liste des Participants</h2>
+            <p>Suivi en temps réel des intervenants, conférenciers et invités du rassemblement scientifique mondial.</p>
+        </div>
+
+        <h3 class="section-title">Membres enregistrés</h3>
+        
+        <div id="loading-container">
+            <p id="loading-calcul">Calcul en cours...</p>
+            <p id="loading-fetch">Récupération des profils depuis le serveur MockAPI...</p>
+        </div>
+
+        <div id="error-message" style="display: none;">
+            <p>Échec de la synchronisation. Veuillez vérifier votre accès à Internet.</p>
+            <button id="btn-reconnect" type="button">Forcer la reconnexion</button>
+        </div>
+
+        <div id="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Avatar</th>
+                        <th>Nom & Prénom</th>
+                        <th>Rôle Académique</th>
+                        <th>Pays / Affiliation</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Thématique d'intervention</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </div>
+
+        <section id="form-section">
+            <h3>Inscrire un nouveau participant</h3>
+            <form id="add-participant-form">
+                
+                <div class="form-group">
+                    <label for="input-name">Nom complet :</label>
+                    <input type="text" id="input-name" placeholder="Ex: Dr. Kamaleu" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="select-role">Statut :</label>
+                    <select id="select-role" required>
+                        <option value="Participant">Participant Simple</option>
+                        <option value="Intervenant">Intervenant / Conférencier</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-country">Pays d'origine :</label>
+                    <input type="text" id="input-country" placeholder="Ex: Cameroun" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-email">Adresse e-mail :</label>
+                    <input type="email" id="input-email" placeholder="nom@exemple.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-phone">Téléphone portable :</label>
+                    <input type="tel" id="input-phone" placeholder="Ex: +237..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-topic">Thématique de recherche :</label>
+                    <input type="text" id="input-topic" placeholder="Ex: Modélisation stochastique">
+                </div>
+
+                <div class="form-group">
+                    <label for="input-avatar">Lien de la photo de profil (URL) :</label>
+                    <input type="url" id="input-avatar" placeholder="https://exemple.com/photo.jpg">
+                </div>
+
+                <button type="submit" id="btn-submit">Valider et sauvegarder</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            
+            <div class="footer-column">
+                <h3>Comité Scientifique</h3>
+                <p>Application web de suivi et de gestion des invitations pour le rassemblement scientifique international.</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Navigation</h3>
+                <a href="index.html">Accueil</a>
+                <a href="#form-section">Inscrire un membre</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Secrétariat</h3>
+                <p><strong>Email :</strong> contact@seminaire-international.org</p>
+                <p><strong>Horaires :</strong> Lun - Ven : 8h - 18h</p>
+                <p><strong>Localisation :</strong> Douala, Cameroun</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 - Secrétariat du Comité Scientifique. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Remplacement fait ici : uniquement app.js et list-page.js dans le bon ordre -->
+<script src="js/list-page.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
