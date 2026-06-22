@@ -184,9 +184,7 @@ function recupererMembres() {
                         "td"
                     );
 
-                tdPays.textContent =
-                    personne.pays ||
-                    "Cameroun";
+                tdPays.textContent = personne.pays || "Non spécifié";
 
                 ligne.appendChild(
                     tdPays
