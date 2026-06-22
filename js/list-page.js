@@ -230,8 +230,9 @@ function recupererMembres() {
                         "td"
                     );
 
+                // CORRECTION ICI : Changement de 'personne.thematique' par la clé exacte de MockAPI
                 tdTheme.textContent =
-                    personne.thematique ||
+                    personne.thematiquedintervention ||
                     "—";
 
                 ligne.appendChild(
@@ -239,7 +240,7 @@ function recupererMembres() {
                 );
 
                 /*
-                BOUTON VOIR
+                BOUTON VOIR (ACTION)
                 */
                 const tdAction =
                     document.createElement(
@@ -251,8 +252,9 @@ function recupererMembres() {
                         "a"
                     );
 
+                // CORRECTION ICI : Remplacement du nom du fichier HTML pour correspondre au fichier de détails (avec l'ID)
                 boutonVoir.href =
-                    "Participant.html?id=" +
+                    "details.html?id=" +
                     personne.id;
 
                 boutonVoir.textContent =
@@ -342,7 +344,8 @@ function enregistrerMembre(
                 )
                 .value.trim(),
 
-        thematique:
+        // CORRECTION ICI : Envoi vers le bon nom de champ MockAPI lors de la création
+        thematiquedintervention:
             document
                 .getElementById(
                     "input-topic"
@@ -408,4 +411,4 @@ function enregistrerMembre(
                 "Impossible d'enregistrer le participant."
             );
         });
-                }
+}
