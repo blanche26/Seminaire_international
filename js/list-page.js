@@ -120,9 +120,12 @@ function recupererMembres() {
                         "img"
                     );
 
-                imageProfil.src =
-                    personne.avatar ||
-                    "https://via.placeholder.com/40";
+                // Sécurité photo : si vide ou invalide, met l'avatar par défaut
+                if (!personne.avatar || personne.avatar.trim() === "" || personne.avatar.length < 10) {
+                    imageProfil.src = "https://www.w3schools.com/howto/img_avatar.png";
+                } else {
+                    imageProfil.src = personne.avatar;
+                }
 
                 imageProfil.style.width =
                     "40px";
@@ -265,7 +268,7 @@ function recupererMembres() {
                     boutonVoir
                 );
 
-                // AJOUT DU BOUTON SUPPRIMER
+                // Bouton Supprimer lié à la fonction confirm (OK / Annuler)
                 const boutonSupprimer =
                     document.createElement(
                         "button"
@@ -330,6 +333,7 @@ SUPPRESSION D'UN PARTICIPANT (DELETE)
 */
 function supprimerMembre(id, nom) {
 
+    // Utilisation obligatoire de confirm() pour générer les boutons OK et Annuler
     const confirmation = confirm(
         "Voulez-vous vraiment supprimer " + nom + " ?"
     );
