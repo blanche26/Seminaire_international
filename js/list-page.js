@@ -120,13 +120,12 @@ function recupererMembres() {
                         "img"
                     );
 
-                // On met l'avatar de la personne ou l'avatar par défaut
-                imageProfil.src = personne.avatar || "https://www.w3schools.com/howto/img_avatar.png";
-                
-                // Si l'image est cassée ou introuvable, on bascule sur l'avatar par défaut
-                imageProfil.onerror = function() {
-                    this.src = "https://www.w3schools.com/howto/img_avatar.png";
-                };
+                // Sécurité photo : si vide ou invalide, met l'avatar par défaut
+                if (!personne.avatar || personne.avatar.trim() === "" || personne.avatar.length < 10) {
+                    imageProfil.src = "https://www.w3schools.com/howto/img_avatar.png";
+                } else {
+                    imageProfil.src = personne.avatar;
+                }
 
                 imageProfil.style.width =
                     "40px";
@@ -269,7 +268,7 @@ function recupererMembres() {
                     boutonVoir
                 );
 
-                // Bouton Supprimer
+                // Bouton Supprimer lié à la fonction confirm (OK / Annuler)
                 const boutonSupprimer =
                     document.createElement(
                         "button"
@@ -284,14 +283,13 @@ function recupererMembres() {
                 boutonSupprimer.style.marginLeft =
                     "10px";
 
-                // Sauvegarde des données pour ce tour de boucle
-                const idFixe = personne.id;
-                const nomFixe = personne.name || "Ce participant";
-
                 boutonSupprimer.addEventListener(
                     "click",
                     function () {
-                        supprimerMembre(idFixe, nomFixe);
+                        supprimerMembre(
+                            personne.id,
+                            personne.name
+                        );
                     }
                 );
 
@@ -312,89 +310,3 @@ function recupererMembres() {
         .catch(function (err) {
 
             console.error(
-                "Erreur :",
-                err
-            );
-
-            if (zoneChargement) {
-                zoneChargement.style.display =
-                    "none";
-            }
-
-            if (zoneErreur) {
-                zoneErreur.style.display =
-                    "block";
-            }
-        });
-}
-
-/*
-====================================
-SUPPRESSION D'UN PARTICIPANT (DELETE)
-====================================
-*/
-function supprimerMembre(id, nom) {
-
-    const confirmation = confirm(
-        "Voulez-vous vraiment supprimer " + nom + " ?"
-    );
-
-    // Sécurité absolue : Si l'utilisateur clique sur Annuler (false), on bloque TOUT immédiatement
-    if (!confirmation) {
-        return; 
-    }
-
-    // Le code suivant ne s'exécute QUE si l'utilisateur a cliqué sur OK
-    fetch(API_URL + "/" + id, {
-        method: "DELETE"
-    })
-        .then(function (response) {
-            if (!response.ok) {
-                throw new Error(
-                    "Erreur lors de la suppression"
-                );
-            }
-            return response.json();
-        })
-        .then(function () {
-            alert(
-                "Le membre a été supprimé avec succès."
-            );
-            recupererMembres();
-        })
-        .catch(function (err) {
-            console.error(
-                "Erreur :",
-                err
-            );
-            alert(
-                "Impossible de supprimer ce participant."
-            );
-        });
-}
-
-/*
-====================================
-AJOUT D'UN PARTICIPANT
-====================================
-*/
-function enregistrerMembre(
-    evenement
-) {
-
-    evenement.preventDefault();
-
-    const donneesFormulaire = {
-
-        name:
-            document
-                .getElementById(
-                    "input-name"
-                )
-                .value.trim(),
-
-        statut:
-            document
-                .getElementById(
-                    "select-role"
-                )
