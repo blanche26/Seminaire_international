@@ -251,9 +251,9 @@ function recupererMembres() {
                         "a"
                     );
 
-                // MODIFICATION SÉCURISÉE ICI : Ajout du "./" pour régler l'erreur 404 sur GitHub Pages
+                // CORRECTION FINALE : Correspondance exacte avec le fichier GitHub "Participant.html" (P majuscule)
                 boutonVoir.href =
-                    "./participant.html?id=" +
+                    "./Participant.html?id=" +
                     personne.id;
 
                 boutonVoir.textContent =
