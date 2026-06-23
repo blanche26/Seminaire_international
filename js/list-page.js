@@ -239,7 +239,7 @@ function recupererMembres() {
                 );
 
                 /*
-                BOUTON VOIR (ACTION)
+                BOUTONS D'ACTION (VOIR & SUPPRIMER)
                 */
                 const tdAction =
                     document.createElement(
@@ -251,7 +251,6 @@ function recupererMembres() {
                         "a"
                     );
 
-                // CORRECTION FINALE : Correspondance exacte avec le fichier GitHub "Participant.html" (P majuscule)
                 boutonVoir.href =
                     "./Participant.html?id=" +
                     personne.id;
@@ -264,6 +263,35 @@ function recupererMembres() {
 
                 tdAction.appendChild(
                     boutonVoir
+                );
+
+                // AJOUT DU BOUTON SUPPRIMER
+                const boutonSupprimer =
+                    document.createElement(
+                        "button"
+                    );
+
+                boutonSupprimer.textContent =
+                    "Supprimer";
+
+                boutonSupprimer.className =
+                    "btn-action-supprimer";
+
+                boutonSupprimer.style.marginLeft =
+                    "10px";
+
+                boutonSupprimer.addEventListener(
+                    "click",
+                    function () {
+                        supprimerMembre(
+                            personne.id,
+                            personne.name
+                        );
+                    }
+                );
+
+                tdAction.appendChild(
+                    boutonSupprimer
                 );
 
                 ligne.appendChild(
@@ -292,6 +320,51 @@ function recupererMembres() {
                 zoneErreur.style.display =
                     "block";
             }
+        });
+}
+
+/*
+====================================
+SUPPRESSION D'UN PARTICIPANT (DELETE)
+====================================
+*/
+function supprimerMembre(id, nom) {
+
+    const confirmation = confirm(
+        "Voulez-vous vraiment supprimer " + nom + " ?"
+    );
+
+    if (!confirmation) {
+        return;
+    }
+
+    fetch(API_URL + "/" + id, {
+        method: "DELETE"
+    })
+        .then(function (response) {
+
+            if (!response.ok) {
+                throw new Error(
+                    "Erreur lors de la suppression"
+                );
+            }
+
+            return response.json();
+        })
+        .then(function () {
+            alert(
+                "Le membre a été supprimé avec succès."
+            );
+            recupererMembres();
+        })
+        .catch(function (err) {
+            console.error(
+                "Erreur :",
+                err
+            );
+            alert(
+                "Impossible de supprimer ce participant."
+            );
         });
 }
 
