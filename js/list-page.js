@@ -251,9 +251,9 @@ function recupererMembres() {
                         "a"
                     );
 
-                // AJOUT JUSTE ICI : On force les minuscules "participant.html" pour éviter l'erreur 404 sur GitHub Pages
+                // MODIFICATION SÉCURISÉE ICI : Ajout du "./" pour régler l'erreur 404 sur GitHub Pages
                 boutonVoir.href =
-                    "participant.html?id=" +
+                    "./participant.html?id=" +
                     personne.id;
 
                 boutonVoir.textContent =
