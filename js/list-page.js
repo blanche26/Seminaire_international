@@ -230,7 +230,6 @@ function recupererMembres() {
                         "td"
                     );
 
-                // CORRECTION ICI : Changement de 'personne.thematique' par la clé exacte de MockAPI
                 tdTheme.textContent =
                     personne.thematiquedintervention ||
                     "—";
@@ -252,9 +251,9 @@ function recupererMembres() {
                         "a"
                     );
 
-                // CORRECTION ICI : Remplacement du nom du fichier HTML pour correspondre au fichier de détails (avec l'ID)
+                // AJOUT JUSTE ICI : On force les minuscules "participant.html" pour éviter l'erreur 404 sur GitHub Pages
                 boutonVoir.href =
-                    "details.html?id=" +
+                    "participant.html?id=" +
                     personne.id;
 
                 boutonVoir.textContent =
@@ -344,7 +343,6 @@ function enregistrerMembre(
                 )
                 .value.trim(),
 
-        // CORRECTION ICI : Envoi vers le bon nom de champ MockAPI lors de la création
         thematiquedintervention:
             document
                 .getElementById(
