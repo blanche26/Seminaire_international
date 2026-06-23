@@ -268,7 +268,7 @@ function recupererMembres() {
                     boutonVoir
                 );
 
-                // Bouton Supprimer lié à la fonction confirm (OK / Annuler)
+                // Bouton Supprimer lié de façon sécurisée à l'identifiant
                 const boutonSupprimer =
                     document.createElement(
                         "button"
@@ -283,13 +283,16 @@ function recupererMembres() {
                 boutonSupprimer.style.marginLeft =
                     "10px";
 
+                // Sécurisation de l'identifiant directement attaché au bouton
+                boutonSupprimer.setAttribute("data-id", personne.id);
+                boutonSupprimer.setAttribute("data-name", personne.name || "Ce participant");
+
                 boutonSupprimer.addEventListener(
                     "click",
-                    function () {
-                        supprimerMembre(
-                            personne.id,
-                            personne.name
-                        );
+                    function (evenementBouton) {
+                        const idCible = evenementBouton.target.getAttribute("data-id");
+                        const nomCible = evenementBouton.target.getAttribute("data-name");
+                        supprimerMembre(idCible, nomCible);
                     }
                 );
 
@@ -333,7 +336,7 @@ SUPPRESSION D'UN PARTICIPANT (DELETE)
 */
 function supprimerMembre(id, nom) {
 
-    // Utilisation obligatoire de confirm() pour générer les boutons OK et Annuler
+    // Utilisation de confirm() pour générer automatiquement OK et Annuler
     const confirmation = confirm(
         "Voulez-vous vraiment supprimer " + nom + " ?"
     );
