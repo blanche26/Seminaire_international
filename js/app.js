@@ -35,8 +35,8 @@ function initPageDetail() {
 
     const zoneChargement = document.querySelector(".loading-placeholder");
 
-    // 2. Récupération des données du participant sur MockAPI
-    fetch("https://6a3676af766b831960f941b8.mockapi.io/participants/" + idParticipant)
+    // 2. Récupération des données du participant sur MockAPI (Accordé avec api-config.js)
+    fetch(API_URL + "/" + idParticipant)
         .then(function (response) {
             if (!response.ok) {
                 throw new Error("Impossible de joindre le serveur");
@@ -83,7 +83,8 @@ function initPageDetail() {
                 avatar: document.getElementById("edit-avatar").value.trim()
             };
 
-            fetch("https://6a3676af766b831960f941b8.mockapi.io/participants/" + idParticipant, {
+            // Enregistrement des modifications (Accordé avec api-config.js)
+            fetch(API_URL + "/" + idParticipant, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
