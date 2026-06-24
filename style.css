@@ -44,11 +44,17 @@ body {
     margin-top: 10px;
 }
 
+/* MODIFICATION ICI : Les liens normaux sont un peu adoucis/grisés par défaut */
 #main-nav a {
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.6); 
     text-decoration: none;
     margin-right: 20px;
     font-weight: bold;
+}
+
+/* MODIFICATION ICI : Le lien qui a la classe active devient blanc pur */
+#main-nav a.active {
+    color: #ffffff;
 }
 
 #main-nav a:hover {
