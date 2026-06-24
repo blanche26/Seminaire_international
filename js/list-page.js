@@ -57,15 +57,9 @@ function recupererMembres() {
             "error-message"
         );
 
-    if (zoneChargement) {
-        zoneChargement.style.display =
-            "block";
-    }
-
-    if (zoneErreur) {
-        zoneErreur.style.display =
-            "none";
-    }
+    // MODIFICATION 1 : On utilise ton utils.js pour afficher le chargement et cacher l'ancienne erreur
+    gererStatutChargement("loading-container", true);
+    gererStatutChargement("error-message", false);
 
     fetch(API_URL)
 
@@ -82,10 +76,8 @@ function recupererMembres() {
 
         .then(function (liste) {
 
-            if (zoneChargement) {
-                zoneChargement.style.display =
-                    "none";
-            }
+            // MODIFICATION 2 : On utilise ton utils.js pour masquer le chargement
+            gererStatutChargement("loading-container", false);
 
             if (!zoneTableau) {
                 return;
@@ -318,12 +310,9 @@ function recupererMembres() {
                 err
             );
 
-            if (zoneChargement) {
-                zoneChargement.style.display =
-                    "none";
-            }
+            // MODIFICATION 3 : On utilise tes fonctions utilitaires pour nettoyer le chargement et afficher le message d'erreur
+            gererStatutChargement("loading-container", false);
 
-            // MODIFICATION STRICTE POUR UTILS.JS
             if (zoneTableau) {
                 zoneTableau.innerHTML = "";
             }
