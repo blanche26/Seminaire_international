@@ -12,21 +12,36 @@ function initMobileNav() {
     }
 
     /*
-    GESTION DU CLIC
+    GESTION DU CLIC ÉTUDIANT
     */
     for (let i = 0; i < liens.length; i++) {
-        liens[i].addEventListener("click", function () {
+        liens[i].addEventListener("click", function (evenement) {
+            
+            // 1. On récupère la destination du lien (ex: "#form-section" ou "index.html")
+            const cible = this.getAttribute("href");
 
-            // Enlever la classe active sur tous les liens
+            // 2. Si le lien pointe vers une section de la page (commence par #)
+            if (cible.indexOf("#") === 0) {
+                
+                // On empêche le navigateur de sauter brutalement ou de recharger
+                evenement.preventDefault();
+
+                // On cherche la section correspondante dans la page
+                const section = document.querySelector(cible);
+                if (section) {
+                    // On fait descendre la page proprement de manière fluide
+                    section.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+
+            // 3. Mise à jour visuelle des classes actives
             for (let j = 0; j < liens.length; j++) {
                 liens[j].classList.remove("active");
             }
-
-            // Ajouter la classe active sur le lien cliqué
             this.classList.add("active");
         });
     }
 }
 
-// On lance la fonction immédiatement pour qu'elle soit active
+// Lancement automatique du script
 initMobileNav();
