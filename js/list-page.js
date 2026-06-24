@@ -281,9 +281,11 @@ function recupererMembres() {
                 boutonSupprimer.className =
                     "btn-action-supprimer";
 
-                // MODIFICATION SOUHAITÉE : On applique le display block et l'espacement vers le bas
+                // ON AJOUTE UN PLUS GRAND ESPACE EN DESSOUS DE "VOIR" SANS TOUCHER À LA LARGEUR
                 boutonSupprimer.style.display = "block";
-                boutonSupprimer.style.marginTop = "8px";
+                boutonSupprimer.style.marginTop = "18px";
+                boutonSupprimer.style.marginLeft = "auto";
+                boutonSupprimer.style.marginRight = "auto";
 
                 boutonSupprimer.addEventListener(
                     "click",
@@ -339,143 +341,12 @@ function supprimerMembre(id, nom) {
         "Voulez-vous vraiment supprimer " + nom + " ?"
     );
 
-    // CORRECTION DE SÉCURITÉ ICI : Si l'utilisateur clique sur Annuler ou ferme la boîte, on stoppe TOUT immédiatement
     if (!confirmation) {
         return; 
     }
 
-    // Le code continue uniquement si l'utilisateur a cliqué sur "OK"
     fetch(API_URL + "/" + id, {
         method: "DELETE"
     })
         .then(function (response) {
-            if (!response.ok) {
-                throw new Error("Erreur lors de la suppression");
-            }
-            return response.json();
-        })
-        .then(function () {
-            alert("Le membre a été supprimé avec succès.");
-            recupererMembres();
-        })
-        .catch(function (err) {
-            console.error("Erreur :", err);
-            alert("Impossible de supprimer ce participant.");
-        });
-}
-
-/*
-====================================
-AJOUT D'UN PARTICIPANT
-====================================
-*/
-function enregistrerMembre(
-    evenement
-) {
-
-    evenement.preventDefault();
-
-    const donneesFormulaire = {
-
-        name:
-            document
-                .getElementById(
-                    "input-name"
-                )
-                .value.trim(),
-
-        statut:
-            document
-                .getElementById(
-                    "select-role"
-                )
-                .value,
-
-        pays:
-            document
-                .getElementById(
-                    "input-country"
-                )
-                .value.trim(),
-
-        email:
-            document
-                .getElementById(
-                    "input-email"
-                )
-                .value.trim(),
-
-        telephone:
-            document
-                .getElementById(
-                    "input-phone"
-                )
-                .value.trim(),
-
-        thematiquedintervention:
-            document
-                .getElementById(
-                    "input-topic"
-                )
-                .value.trim(),
-
-        avatar:
-            document
-                .getElementById(
-                    "input-avatar"
-                )
-                .value.trim()
-    };
-
-    fetch(API_URL, {
-
-        method: "POST",
-
-        headers: {
-            "Content-Type":
-                "application/json"
-        },
-
-        body: JSON.stringify(
-            donneesFormulaire
-        )
-    })
-
-        .then(function (response) {
-
-            if (!response.ok) {
-                throw new Error(
-                    "Erreur d'enregistrement"
-                );
-            }
-
-            return response.json();
-        })
-
-        .then(function () {
-
-            document
-                .getElementById(
-                    "add-participant-form"
-                )
-                .reset();
-
-            recupererMembres();
-
-            alert(
-                "Participant enregistré avec succès."
-            );
-        })
-
-        .catch(function (err) {
-
-            console.error(
-                "Erreur :",
-                err
-            );
-
-            alert(
-                "Impossible d'enregistrer le participant."
-            );
-        });
-}
+            if
