@@ -1,10 +1,32 @@
-/**
- * Module de navigation (nav.js)
- * Gère les comportements du menu et de la navigation
- */
-
+/*
+====================================
+INITIALISATION DU MENU
+====================================
+*/
 function initMobileNav() {
-    // Sécurise l'appel fait dans app.js pour éviter les erreurs de fonction manquante
-    console.log("Navigation initialisée.");
+
+    const liens = document.querySelectorAll("#main-nav a");
+
+    if (liens.length === 0) {
+        return;
+    }
+
+    /*
+    GESTION DU CLIC
+    */
+    for (let i = 0; i < liens.length; i++) {
+        liens[i].addEventListener("click", function () {
+
+            // Enlever la classe active sur tous les liens
+            for (let j = 0; j < liens.length; j++) {
+                liens[j].classList.remove("active");
+            }
+
+            // Ajouter la classe active sur le lien cliqué
+            this.classList.add("active");
+        });
+    }
 }
 
+// On lance la fonction immédiatement pour qu'elle soit active
+initMobileNav();
