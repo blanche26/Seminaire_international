@@ -323,10 +323,8 @@ function recupererMembres() {
                     "none";
             }
 
-            if (zoneErreur) {
-                zoneErreur.style.display =
-                    "block";
-                }
+            // MODIFICATION STRICTEMENT NÉCESSAIRE : On utilise la fonction de utils.js pour afficher ton bloc d'erreur d'origine
+            afficherMessageErreur("error-message", "Échec de la synchronisation. Veuillez vérifier votre accès à Internet.");
         });
 }
 
