@@ -323,7 +323,11 @@ function recupererMembres() {
                     "none";
             }
 
-            // MODIFICATION STRICTEMENT NÉCESSAIRE : On utilise la fonction de utils.js pour afficher ton bloc d'erreur d'origine
+            // MODIFICATION STRICTE POUR UTILS.JS
+            if (zoneTableau) {
+                zoneTableau.innerHTML = "";
+            }
+
             afficherMessageErreur("error-message", "Échec de la synchronisation. Veuillez vérifier votre accès à Internet.");
         });
 }
