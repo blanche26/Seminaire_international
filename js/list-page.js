@@ -1,5 +1,5 @@
-const API_URL =
-    "https://6a3676af766b831960f941b8.mockapi.io/participants";
+// Accordé avec api-config.js : La variable API_URL est maintenant gérée globalement
+// const API_URL = "https://6a3676af766b831960f941b8.mockapi.io/participants";
 
 /*
 ====================================
