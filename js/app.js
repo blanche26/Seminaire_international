@@ -33,7 +33,8 @@ function initPageDetail() {
         return;
     }
 
-    const zoneChargement = document.querySelector(".loading-placeholder");
+    // SEULE MODIFICATION : On cible le bon conteneur de chargement pour qu'il puisse s'effacer
+    const zoneChargement = document.getElementById("loading-container") || document.querySelector(".loading-placeholder");
 
     // 2. Récupération des données du participant sur MockAPI (Accordé avec api-config.js)
     fetch(API_URL + "/" + idParticipant)
