@@ -35,37 +35,54 @@ function initPageDetail() {
 
     const zoneChargement = document.querySelector(".loading-placeholder");
 
-    // 2. Récupération des données du participant sur MockAPI (Accordé avec api-config.js)
-    fetch(API_URL + "/" + idParticipant)
-        .then(function (response) {
-            if (!response.ok) {
-                throw new Error("Impossible de joindre le serveur");
-            }
-            return response.json();
-        })
-        .then(function (personne) {
-            // On cache le message de chargement
-            if (zoneChargement) {
-                zoneChargement.style.display = "none";
-            }
+    // L'ACTION DE CHARGEMENT ISOLEE POUR POUVOIR LA REJOUER QUAND LA CONNEXION REVIENT
+    function chargerDonnees() {
+        if (zoneChargement) {
+            zoneChargement.style.display = "block";
+            zoneChargement.innerHTML = "<p>Chargement des détails du profil...</p>";
+        }
 
-            // On remplit automatiquement les champs du formulaire de modification
-            document.getElementById("edit-name").value = personne.name || "";
-            document.getElementById("edit-role").value = personne.statut || "Participant";
-            document.getElementById("edit-country").value = personne.pays || "";
-            document.getElementById("edit-email").value = personne.email || "";
-            document.getElementById("edit-phone").value = personne.telephone || "";
-            document.getElementById("edit-avatar").value = personne.avatar || "";
-            
-            // Utilisation de ta clé exacte 'thematiquedintervention'
-            document.getElementById("edit-topic").value = personne.thematiquedintervention || "";
-        })
-        .catch(function (err) {
-            console.error("Erreur :", err);
-            if (zoneChargement) {
-                zoneChargement.innerHTML = "<p style='color:red;'>Erreur lors de la récupération des détails.</p>";
-            }
-        });
+        // 2. Récupération des données du participant sur MockAPI (Accordé avec api-config.js)
+        fetch(API_URL + "/" + idParticipant)
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error("Impossible de joindre le serveur");
+                }
+                return response.json();
+            })
+            .then(function (personne) {
+                // On cache le message de chargement
+                if (zoneChargement) {
+                    zoneChargement.style.display = "none";
+                }
+
+                // On remplit automatiquement les champs du formulaire de modification
+                document.getElementById("edit-name").value = personne.name || "";
+                document.getElementById("edit-role").value = personne.statut || "Participant";
+                document.getElementById("edit-country").value = personne.pays || "";
+                document.getElementById("edit-email").value = personne.email || "";
+                document.getElementById("edit-phone").value = personne.telephone || "";
+                document.getElementById("edit-avatar").value = personne.avatar || "";
+                
+                // Utilisation de ta clé exacte 'thematiquedintervention'
+                document.getElementById("edit-topic").value = personne.thematiquedintervention || "";
+            })
+            .catch(function (err) {
+                console.error("Erreur :", err);
+                if (zoneChargement) {
+                    zoneChargement.style.display = "block";
+                    zoneChargement.innerHTML = "<p style='color:red;'>Échec de la synchronisation. Veuillez vérifier votre accès à Internet.</p>";
+                }
+            });
+    }
+
+    // Premier lancement automatique au chargement de la page
+    chargerDonnees();
+
+    // AJOUT UNIQUE : Si la connexion internet revient, on relance automatiquement sans actualiser la page !
+    window.addEventListener("online", function () {
+        chargerDonnees();
+    });
 
     // 3. Écoute de la soumission du formulaire pour enregistrer les modifications (PUT)
     const formulaireEdition = document.getElementById("edit-participant-form");
