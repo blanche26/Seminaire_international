@@ -19,9 +19,8 @@
 
             <nav id="main-nav">
                 <a href="index.html">Accueil</a>
-                <a href="index.html#form-section">
-                    Inscrire un membre
-                </a>
+                <a href="index.html#table-container">Liste</a>
+                <a href="index.html#form-section">Inscription</a>
             </nav>
         </div>
     </header>
@@ -29,19 +28,17 @@
     <main class="container">
 
         <div class="back-link-container">
-            <a href="index.html" class="btn-back">
+            <a href="index.html#table-container" class="btn-back">
                 ← Retour à l'annuaire des participants
             </a>
         </div>
 
-        <section id="participant-detail-card" class="profile-card">
+        <section id="participant-detail-card" class="form-card">
+            <h3>Mettre à jour le profil du membre</h3>
+
             <div class="loading-placeholder">
                 <p>Chargement des détails du profil...</p>
             </div>
-        </section>
-
-        <section id="edit-section" class="form-card">
-            <h3>Mettre à jour le profil du membre</h3>
 
             <form id="edit-participant-form">
 
@@ -130,10 +127,8 @@
 
             <div class="footer-column">
                 <h3>Navigation</h3>
-                <a href="index.html">Accueil</a>
-                <a href="index.html#form-section">
-                    Inscrire un membre
-                </a>
+                <a href="index.html#table-container">Liste</a>
+                <a href="index.html#form-section">Inscription</a>
             </div>
 
             <div class="footer-column">
@@ -153,12 +148,10 @@
         </div>
     </footer>
 
-        <script src="js/api-config.js"></script>
+    <script src="js/api-config.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/nav.js"></script>
-    
     <script src="js/participant-detail.js"></script>
-</body>
-
+    <script src="js/app.js"></script>
 </body>
 </html>
