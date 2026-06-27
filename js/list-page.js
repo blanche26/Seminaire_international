@@ -279,9 +279,12 @@ function recupererMembres() {
                 boutonSupprimer.style.marginLeft = "auto";
                 boutonSupprimer.style.marginRight = "auto";
 
+                // CORRECTION 1 : On stoppe le double-clic parasite de l'Oppo pour que ça réagisse au premier tour
                 boutonSupprimer.addEventListener(
                     "click",
-                    function () {
+                    function (evenement) {
+                        evenement.preventDefault();
+                        evenement.stopPropagation();
                         supprimerMembre(
                             personne.id,
                             personne.name
@@ -332,29 +335,27 @@ function supprimerMembre(id, nom) {
         "Voulez-vous vraiment supprimer " + nom + " ?"
     );
 
-    // CORRECTION DE SÉCURITÉ ICI : Si l'utilisateur clique sur Annuler ou ferme la boîte, on stoppe TOUT immédiatement
-    if (!confirmation) {
-        return; 
+    // CORRECTION 2 : Vérification stricte de la réponse pour bloquer définitivement l'annulation
+    if (confirmation === true) {
+        // Le code continue uniquement si l'utilisateur a cliqué sur "OK"
+        fetch(API_URL + "/" + id, {
+            method: "DELETE"
+        })
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error("Erreur lors de la suppression");
+                }
+                return response.json();
+            })
+            .then(function () {
+                alert("Le membre a été supprimé avec succès.");
+                recupererMembres();
+            })
+            .catch(function (err) {
+                console.error("Erreur :", err);
+                alert("Impossible de supprimer ce participant.");
+            });
     }
-
-    // Le code continue uniquement si l'utilisateur a cliqué sur "OK"
-    fetch(API_URL + "/" + id, {
-        method: "DELETE"
-    })
-        .then(function (response) {
-            if (!response.ok) {
-                throw new Error("Erreur lors de la suppression");
-            }
-            return response.json();
-        })
-        .then(function () {
-            alert("Le membre a été supprimé avec succès.");
-            recupererMembres();
-        })
-        .catch(function (err) {
-            console.error("Erreur :", err);
-            alert("Impossible de supprimer ce participant.");
-        });
 }
 
 /*
